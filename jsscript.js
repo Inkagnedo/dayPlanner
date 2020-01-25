@@ -1,16 +1,18 @@
-$('input').keypress(function(event){
-	if(event.which === 13){
-		var todoText = $(this).val();
-		$(this).val("");
-		$('ul').append('<li>' + todoText + '<span><i class="fa fa-trash"</i></span>');
-	}
-});
-$('ul').on('click', "span" , function(event){
-	$(this).parent().fadeOut(500,function(){
-		$(this).remove();
+var now = moment().format("dddd, MMMM Do, YYYY, h:mm:ss A");
+     // Saturday, June 9th, 2007, 5:46:21 PM
+$('#date').append(now);
+
+$(document).ready(function() {
+	$('btn').on('click', 'button[name=dotemp]', function() {
+		$.ajax({
+			type: "post",
+			url: "process.php",
+			dataType: 'json',
+			data: {
+				htmlcode: $("#formRaw").html()
+			},
+			success: function(json) {
+			}
+		});
 	});
-	event.stopPropagation();
-});
-$('ul').on('click', 'li', function(){
-	$(this).toggleClass('done');
-});
+})
